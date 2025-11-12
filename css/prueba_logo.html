@@ -1,0 +1,95 @@
+<!-- ====== ESTILOS OPCIONALES ====== -->
+<style>
+  .logo-flask {
+    --logo-color: #000000;           /* Cambiá el color por defecto acá */
+    --stroke: 4;                     /* Grosor de línea */
+    width: 160px;                    /* Tamaño del SVG (editá a gusto) */
+    height: auto;
+    display: inline-block;
+  }
+  .logo-flask * {
+    vector-effect: non-scaling-stroke;
+    stroke: var(--logo-color);
+    stroke-width: var(--stroke);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+
+  /* Variantes de color listas para usar */
+  .logo--negro  { --logo-color: #000000; }
+  .logo--blanco { --logo-color: #FFFFFF; }   /* Fondo seguirá siendo transparente */
+  .logo--naranja{ --logo-color: #D95C16; }
+</style>
+
+<!-- ==========================================================
+     SVG — LOGO TUBO DE ENSAYO (editable y sin fondo)
+     Partes:
+       - #outline   : contorno del frasco
+       - #ticks     : marcas de medición
+       - #liquid    : forma del líquido (recortada por #clip-interior)
+       - #b1 #b2 #b3: burbujas
+     ========================================================== -->
+
+<!-- === Versión NEGRA === -->
+<svg class="logo-flask logo--negro" viewBox="0 0 100 100" role="img" aria-label="Logo tubo de ensayo">
+  <defs>
+    <!-- Región interior para recortar el líquido -->
+    <clipPath id="clip-interior">
+      <!-- interior del frasco (sin cuello) -->
+      <polygon points="38,58 62,58 75,85 25,85"/>
+    </clipPath>
+  </defs>
+
+  <!-- Contorno del frasco -->
+  <path id="outline"
+        d="M40 15 L40 58 L27 85 L73 85 L60 58 L60 15 M35 15 H45 M55 15 H65"
+        />
+
+  <!-- Marcas de medición (izquierda) -->
+  <g id="ticks">
+    <line x1="30" y1="78" x2="37" y2="78"/>
+    <line x1="31" y1="70" x2="38" y2="70"/>
+    <line x1="32" y1="63" x2="39" y2="63"/>
+  </g>
+
+  <!-- Líquido (recortado al interior) -->
+  <g clip-path="url(#clip-interior)">
+    <path id="liquid"
+          d="M22 74
+             C30 70, 45 68, 52 72
+             C58 75, 70 76, 80 74
+             L80 90 L20 90 Z"
+          />
+  </g>
+
+  <!-- Burbujas -->
+  <g id="bubbles">
+    <circle id="b1" cx="50" cy="68" r="2"/>
+    <circle id="b2" cx="55" cy="60" r="1.6"/>
+    <circle id="b3" cx="48" cy="55" r="1.2"/>
+  </g>
+</svg>
+
+
+<style>
+  /* Oleaje del líquido */
+  .logo-flask #liquid {
+    animation: wave 2.2s ease-in-out infinite;
+  }
+  @keyframes wave {
+    0%,100% { d: path("M22 74 C30 70, 45 68, 52 72 C58 75, 70 76, 80 74 L80 90 L20 90 Z"); }
+    50%     { d: path("M22 73 C30 71, 45 69, 52 71 C58 74, 70 75, 80 73 L80 90 L20 90 Z"); }
+  }
+
+  /* Burbujas subiendo */
+  .logo-flask #b1, .logo-flask #b2, .logo-flask #b3 { animation: rise 2.4s infinite ease-out; }
+  .logo-flask #b2 { animation-delay: .4s; }
+  .logo-flask #b3 { animation-delay: .9s; }
+
+  @keyframes rise {
+    0%   { transform: translateY(0);    opacity: 1; }
+    80%  { transform: translateY(-18px);opacity: .15; }
+    100% { transform: translateY(-22px);opacity: 0; }
+  }
+</style>
